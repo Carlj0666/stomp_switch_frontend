@@ -1,4 +1,4 @@
-const pedals = document.getElementById("pedalsList")
+const pedalsUl = document.getElementById("pedalsListUl")
 
 fetch("http://127.0.0.1:3000/pedals")
 .then(response => response.json())
@@ -8,9 +8,13 @@ function renderPedals(dataFromFetch) {
   //get the pedals from data
   const pedals = dataFromFetch.data
   //iterate over each pedal in the json array and associate it with an li
-  pedals.forEach(pedal => console.log(pedal))
+  pedals.forEach(pedal => {
   //create li's for the pedals
-  debugger
+    const liTag = document.createElement("li")
+    //assign the inner text of the li
+    liTag.innerText = `${pedal.attributes.name}`
+    pedalsUl.append(liTag)
+  debugger  
 
+  })
 }
-
