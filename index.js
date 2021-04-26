@@ -4,17 +4,22 @@ const newPedalsForm = document.getElementById("new-pedal-form")
 const pedalNameInput = document.getElementById("pedal-name")
 const pedalPriceInput = document.getElementById("price")
 const pedalEffectInput = document.getElementById("effect")
-const pedalBrandInput = document.getElementById("brand-name")
-const pedalImageInput = document.getElementById("image-link")
+const pedalBrandInput = document.getElementById("brand_name")
+const pedalImageInput = document.getElementById("image_link")
 
-// create_table "pedals", force: :cascade do |t|
-//     t.string "name"
-//     t.float "price"
-//     t.string "effect"
-//     t.integer "brand_id", null: false
-//     t.datetime "created_at", precision: 6, null: false
-//     t.datetime "updated_at", precision: 6, null: false
-//     t.string "image_link"
+newPedalsForm.addEventListener('submit', processForm)
+
+function processForm(event) {
+  event.preventDefault()
+  const formInfo = {
+    name: pedalNameInput.value,
+    brand_name: pedalBrandInput.value,
+    effect: pedalEffectInput.value,
+    price: pedalPriceInput.value,
+    image_link: pedalImageInput.value
+  }
+  debugger
+}
 
 function fetchPedals() {
 fetch("http://127.0.0.1:3000/pedals")
