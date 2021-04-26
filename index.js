@@ -1,4 +1,5 @@
 const pedalsUl = document.getElementById("pedals-list-ul")
+const newPedalsForm = document.getElementById("new-pedal-form")
 
 fetch("http://127.0.0.1:3000/pedals")
 .then(response => response.json())
