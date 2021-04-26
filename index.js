@@ -1,4 +1,4 @@
-const pedalsUl = document.getElementById("pedalsListUl")
+const pedalsUl = document.getElementById("pedals-list-ul")
 
 fetch("http://127.0.0.1:3000/pedals")
 .then(response => response.json())
