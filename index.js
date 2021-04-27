@@ -1,6 +1,7 @@
+const baseURL = "http://127.0.0.1:3000"
+
 const pedalsUl = document.getElementById("pedals-list-ul")
 const newPedalsForm = document.getElementById("new-pedal-form")
-
 const pedalNameInput = document.getElementById("pedal-name")
 const pedalPriceInput = document.getElementById("price")
 const pedalEffectInput = document.getElementById("effect")
@@ -18,7 +19,20 @@ function processForm(event) {
     price: pedalPriceInput.value,
     image_link: pedalImageInput.value
   }
-  debugger
+  
+  const configObj = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formInfo)
+  }
+
+  fetch("http://127.0.0.1:3000/pedals", configObj)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+  })
 }
 
 function fetchPedals() {
