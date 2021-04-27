@@ -31,8 +31,8 @@ function processForm(event) {
   fetch("http://127.0.0.1:3000/pedals", configObj)
   .then(response => response.json())
   .then(data => {
-    console.log(data)
-    
+    renderPedal(data.data)
+    newPedalsForm.reset()
   })
 }
 
@@ -59,7 +59,7 @@ function renderPedal(pedal) {
   const liTag = document.createElement("li")
   //assign the inner text of the li
 
-  liTag.innerHTML = `${pedal.attributes.brand_name}`
+  liTag.innerHTML = `<div data-id="pedal.id"> ${pedal.attributes.brand_name}` //`${pedal.attributes.brand_name}`
   //Want to add functionality so the brand name expands to show pedals, those expand to show details
   pedalsUl.append(liTag)
 }
