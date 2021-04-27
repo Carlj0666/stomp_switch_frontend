@@ -7,19 +7,23 @@ const pedalPriceInput = document.getElementById("price")
 const pedalEffectInput = document.getElementById("effect")
 const pedalBrandInput = document.getElementById("brand_name")
 const pedalImageInput = document.getElementById("image_link")
+// const pedalBrandIdInput = document.getElementById("brand_id") // added later in debug
 
 newPedalsForm.addEventListener('submit', processForm)
 
 function processForm(event) {
   event.preventDefault()
-  const formInfo = {
+
+  const formInfo = {pedal:  {
     name: pedalNameInput.value,
     brand_name: pedalBrandInput.value,
     effect: pedalEffectInput.value,
     price: pedalPriceInput.value,
     image_link: pedalImageInput.value
-  }
-  
+   // brand_id: pedalBrandIdInput.value // added later in debug
+  }}
+ 
+  // debugger
   const configObj = {
     method: 'POST',
     headers: {
@@ -59,7 +63,7 @@ function renderPedal(pedal) {
   const liTag = document.createElement("li")
   //assign the inner text of the li
 
-  liTag.innerHTML = `<div data-id="pedal.id"> ${pedal.attributes.brand_name}` //`${pedal.attributes.brand_name}`
+  liTag.innerHTML = `<div data-id="${pedal.id}"> ${pedal.attributes.brand_name}` //`${pedal.attributes.brand_name}`
   //Want to add functionality so the brand name expands to show pedals, those expand to show details
   pedalsUl.append(liTag)
 }
