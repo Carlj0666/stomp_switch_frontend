@@ -1,7 +1,7 @@
 Front end lecture starts at 31:28 in: https://www.youtube.com/watch?v=SJlvydXVHcg
 
 
-1) Setup dropdown for Brand that updates and auto fills the field
+1) Add a "filter" to show a brands pedals, or better yet expands to show more below the brand!
 
 Project Checklist
 
