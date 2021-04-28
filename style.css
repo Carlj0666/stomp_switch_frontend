@@ -1,0 +1,4 @@
+div {
+  const liTag = document.querySelector("li")
+  li.firstElementChild.dataset.id
+}

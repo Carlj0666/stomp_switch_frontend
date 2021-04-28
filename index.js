@@ -20,7 +20,7 @@ function processForm(event) {
     effect: pedalEffectInput.value,
     price: pedalPriceInput.value,
     image_link: pedalImageInput.value
-   // brand_id: pedalBrandIdInput.value // added later in debug
+
   }}
  
   // debugger
@@ -28,6 +28,7 @@ function processForm(event) {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json"
     },
     body: JSON.stringify(formInfo)
   }
@@ -62,10 +63,31 @@ function renderPedal(pedal) {
   //create li's for the pedals
   const liTag = document.createElement("li")
   //assign the inner text of the li
+  liTag.id = `pedal-${pedal.id}`
 
-  liTag.innerHTML = `<div data-id="${pedal.id}"> ${pedal.attributes.brand_name}` //`${pedal.attributes.brand_name}`
+  liTag.innerHTML = 
+  `<div data-id="${pedal.id}">${pedal.attributes.brand_name}</div>
+  <button class="delete" data-id="${pedal.id}">Delete</button>
+  `
+  // delete functionality, use above line 72 - <button class="delete" pedal_data_id="${pedal.id}">Delete</button>
   //Want to add functionality so the brand name expands to show pedals, those expand to show details
-  pedalsUl.append(liTag)
+  const deleteButton = liTag.querySelector(".delete")
+  deleteButton.addEventListener("click", deletePedal)
+  pedalsUl.appendChild(liTag)
+
+}
+
+function deletePedal(event) {
+  const id = event.target.dataset.id
+  event.target.parentElement.remove()
+
+    const configObj = {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }
+    fetch(baseURL + "/" + id, configObj)
 }
 
 fetchPedals()
