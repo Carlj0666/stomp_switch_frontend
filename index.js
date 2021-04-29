@@ -46,9 +46,7 @@ fetch("http://127.0.0.1:3000/pedals")
 .then(data => renderPedals(data))
 }
 
-
 function renderPedals(dataFromFetch) {
-  
   //get the pedals from data
   const pedals = dataFromFetch.data
   console.log(pedals)
@@ -64,13 +62,37 @@ function renderPedal(pedal) {
   //assign the inner text of the li
   liTag.id = `pedal-${pedal.id}`
 
-  liTag.innerHTML = 
-  `<div data-id="${pedal.id}">${pedal.attributes.brand_name}</div>
-  <button class="delete" data-id="${pedal.id}">Delete</button>
-  `
+  const divTag = document.createElement("div")
+  divTag.dataset.id = pedal.id
+  divTag.innerText = pedal.attributes.name
+  liTag.appendChild(divTag)
+  
+  const deleteButton = document.createElement("button")
+  deleteButton.classList.add("delete")
+  deleteButton.dataset.id = pedal.id
+  deleteButton.innerText = "Delete"
+  liTag.appendChild(deleteButton)
+
+  
+  // liTag.innerHTML = 
+  // `<div data-id="${pedal.id}">${pedal.attributes.name}</div>
+  // <button class="delete" data-id="${pedal.id}">Delete</button>
+  // `
+
+  //render the pedal
+  //setup event listener on the name
+    //name becomes clickable (toggle) (link)
+      //on click
+        //display
+        // box contains:
+          //brand
+          //effect
+          //image
+          //price
+
   // delete functionality, use above line 72 - <button class="delete" pedal_data_id="${pedal.id}">Delete</button>
   //Want to add functionality so the brand name expands to show pedals, those expand to show details
-  const deleteButton = liTag.querySelector(".delete")
+
   deleteButton.addEventListener("click", deletePedal)
   pedalsUl.appendChild(liTag)
 
