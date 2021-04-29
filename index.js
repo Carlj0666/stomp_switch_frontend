@@ -23,7 +23,6 @@ function processForm(event) {
 
   }}
  
-  // debugger
   const configObj = {
     method: 'POST',
     headers: {
@@ -79,15 +78,22 @@ function renderPedal(pedal) {
 
 function deletePedal(event) {
   const id = event.target.dataset.id
-  event.target.parentElement.remove()
+  
 
     const configObj = {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json"
       }
     }
-    fetch(baseURL + "/" + id, configObj)
+    fetch(baseURL + "/" + "pedals" + "/" + id, configObj)
+    .then(response => {
+      if (response.status = "204") {
+      event.target.parentElement.remove()
+      }
+    })
+
 }
 
 fetchPedals()
