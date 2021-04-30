@@ -73,13 +73,24 @@ function renderPedal(pedal) {
   divTag.appendChild(pedalInfo)
   // iterate over pedal attributes
   const pedalStats = Object.entries(pedal.attributes)
-  // const statsDiv = document.createElement("div")
+  // can also destructure:
+    // const pedalStats pedal.attributes
+      // let {name, effect, price, brand_name, image_link} = pedalStats
+      // in the console name == "Zoia" etc.
+  // OR
+    // function pedalStats(name, effect, price, brand_name, image_link){
+      // return `<div>
+      // <p>${name}</p>
+      // ETC..
+      //</div>`
+    //}
+
   pedalStats.forEach(line => {
     const stat = document.createElement("p")
     stat.append(line[0] + ": " + line[1] + "\n")
     pedalInfo.append(stat)
     })
-  
+  // Could use destructuring to break up pedal.attributes
   
   const deleteButton = document.createElement("button")
   deleteButton.classList.add("delete")
