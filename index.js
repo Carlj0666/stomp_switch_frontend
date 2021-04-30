@@ -20,7 +20,6 @@ function processForm(event) {
     effect: pedalEffectInput.value,
     price: pedalPriceInput.value,
     image_link: pedalImageInput.value
-
   }}
  
   const configObj = {
@@ -34,119 +33,22 @@ function processForm(event) {
 
   fetch("http://127.0.0.1:3000/pedals", configObj)
   .then(response => response.json())
-  .then(data => {
-    renderPedal(data.data)
+  .then(pedal => {
+    const newPedal = new Pedal({id: pedal.data.id, ...pedal.data.attributes})
+    newPedal.render()
     newPedalsForm.reset()
   })
 }
 
-function fetchPedals() {
-fetch("http://127.0.0.1:3000/pedals")
-.then(response => response.json())
-.then(data => renderPedals(data))
-}
-
-function renderPedals(dataFromFetch) {
-  //get the pedals from data
-  const pedals = dataFromFetch["data"] // changed from .data
-  pedals.forEach(pedal => {
-    // update from OO - line 54
-    new Pedal({id: pedal.id, ...pedal.attributes})
-    renderPedal(pedal)
+function createPedals(pedalsData) {
+  pedalsData.forEach(pedalData => {
+    new Pedal({id: pedalData.id, ...pedalData.attributes})
   })
 }
 
-function renderPedal(pedal) {
-  //create li's for the pedals
-  const liTag = document.createElement("li")
-  //assign the inner text of the li
-  liTag.id = `pedal-${pedal.id}`
+Pedal.fetchPedals()
+.then(pedals => {
+  createPedals(pedals.data)
+  Pedal.renderAll()
+})
 
-  const divTag = document.createElement("div")
-  divTag.dataset.id = pedal.id
-  divTag.innerText = pedal.attributes.name
-  liTag.appendChild(divTag)
-
-  //listing attributes of the pedals
-  const pedalInfo = document.createElement("div")
-
-  divTag.appendChild(pedalInfo)
-  // iterate over pedal attributes
-  const pedalStats = Object.entries(pedal.attributes)
-  // can also destructure:
-    // const pedalStats pedal.attributes
-      // let {name, effect, price, brand_name, image_link} = pedalStats
-      // in the console name == "Zoia" etc.
-  // OR
-    // function pedalStats(name, effect, price, brand_name, image_link){
-      // return `<div>
-      // <p>${name}</p>
-      // ETC..
-      //</div>`
-    //}
-
-  pedalStats.forEach(line => {
-    const stat = document.createElement("p")
-    stat.append(line[0] + ": " + line[1] + "\n")
-    pedalInfo.append(stat)
-    })
-  // Could use destructuring to break up pedal.attributes
-  
-  const deleteButton = document.createElement("button")
-  deleteButton.classList.add("delete")
-  deleteButton.dataset.id = pedal.id
-  deleteButton.innerText = "Delete"
-  liTag.appendChild(deleteButton)
-
-  //display other pedal info
-
-
-  //make div tag link
-  //setup event listener on div tag
-
-
-  // liTag.innerHTML = 
-  // `<div data-id="${pedal.id}">${pedal.attributes.name}</div>
-  // <button class="delete" data-id="${pedal.id}">Delete</button>
-  // `
-
-  //render the pedal & delete button
-  //setup event listener on the name
-    //name becomes clickable (toggle) (link)
-      //on click
-        //display
-        // box contains:
-          //brand
-          //effect
-          //image
-          //price
-
-  // delete functionality, use above line 72 - <button class="delete" pedal_data_id="${pedal.id}">Delete</button>
-  //Want to add functionality so the brand name expands to show pedals, those expand to show details
-
-  deleteButton.addEventListener("click", deletePedal)
-  pedalsUl.appendChild(liTag)
-
-}
-
-function deletePedal(event) {
-  const id = event.target.dataset.id
-  
-
-    const configObj = {
-      method: 'DELETE',
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    }
-    fetch(baseURL + "/" + "pedals" + "/" + id, configObj)
-    .then(response => {
-      if (response.status = "204") {
-      event.target.parentElement.remove()
-      }
-    })
-
-}
-
-fetchPedals()
