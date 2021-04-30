@@ -66,6 +66,20 @@ function renderPedal(pedal) {
   divTag.dataset.id = pedal.id
   divTag.innerText = pedal.attributes.name
   liTag.appendChild(divTag)
+
+  //listing attributes of the pedals
+  const pedalInfo = document.createElement("div")
+
+  divTag.appendChild(pedalInfo)
+  // iterate over pedal attributes
+  const pedalStats = Object.entries(pedal.attributes)
+  // const statsDiv = document.createElement("div")
+  pedalStats.forEach(line => {
+    const stat = document.createElement("p")
+    stat.append(line[0] + ": " + line[1] + "\n")
+    pedalInfo.append(stat)
+    })
+  
   
   const deleteButton = document.createElement("button")
   deleteButton.classList.add("delete")
@@ -73,13 +87,19 @@ function renderPedal(pedal) {
   deleteButton.innerText = "Delete"
   liTag.appendChild(deleteButton)
 
-  
+  //display other pedal info
+
+
+  //make div tag link
+  //setup event listener on div tag
+
+
   // liTag.innerHTML = 
   // `<div data-id="${pedal.id}">${pedal.attributes.name}</div>
   // <button class="delete" data-id="${pedal.id}">Delete</button>
   // `
 
-  //render the pedal
+  //render the pedal & delete button
   //setup event listener on the name
     //name becomes clickable (toggle) (link)
       //on click
