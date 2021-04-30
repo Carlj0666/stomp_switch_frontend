@@ -48,10 +48,10 @@ fetch("http://127.0.0.1:3000/pedals")
 
 function renderPedals(dataFromFetch) {
   //get the pedals from data
-  const pedals = dataFromFetch.data
-  console.log(pedals)
-  //iterate over each pedal in the json array and associate it with an li
+  const pedals = dataFromFetch["data"] // changed from .data
   pedals.forEach(pedal => {
+    // update from OO - line 54
+    new Pedal({id: pedal.id, ...pedal.attributes})
     renderPedal(pedal)
   })
 }
