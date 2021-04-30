@@ -7,7 +7,6 @@ const pedalPriceInput = document.getElementById("price")
 const pedalEffectInput = document.getElementById("effect")
 const pedalBrandInput = document.getElementById("brand_name")
 const pedalImageInput = document.getElementById("image_link")
-// const pedalBrandIdInput = document.getElementById("brand_id") // added later in debug
 
 newPedalsForm.addEventListener('submit', processForm)
 
@@ -22,7 +21,7 @@ function processForm(event) {
     image_link: pedalImageInput.value
   }}
  
-  const configObj = {
+  const config = {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +30,7 @@ function processForm(event) {
     body: JSON.stringify(formInfo)
   }
 
-  fetch("http://127.0.0.1:3000/pedals", configObj)
+  fetch("http://127.0.0.1:3000/pedals", config)
   .then(response => response.json())
   .then(pedal => {
     const newPedal = new Pedal({id: pedal.data.id, ...pedal.data.attributes})

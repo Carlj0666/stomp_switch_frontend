@@ -33,6 +33,7 @@ class Pedal {
     liTag.id = `pedal-${this.id}`
   
     const divTag = document.createElement("div")
+//(2) What is the dataset here?
     divTag.dataset.id = this.id
     divTag.innerText = this.name
     liTag.appendChild(divTag)
@@ -55,7 +56,7 @@ class Pedal {
   
     const price = document.createElement("p") 
     price.dataset.id = this.id
-    price.innerText = this.price
+    price.innerText = "$" + this.price
     divTag.appendChild(price)
   
     const priceLabel = document.createTextNode("Price: ")
@@ -70,18 +71,6 @@ class Pedal {
     imageLink.style.width = "300px"
     divTag.appendChild(imageLink)
   
-    // can also destructure:
-      // const pedalStats pedal.attributes
-        // let {name, effect, price, brand_name, image_link} = pedalStats
-        // in the console name == "Zoia" etc.
-    // OR
-      // function pedalStats(name, effect, price, brand_name, image_link){
-        // return `<div>
-        // <p>${name}</p>
-        // ETC..
-        //</div>`
-      //}
-  
     const deleteButton = document.createElement("button")
     deleteButton.classList.add("delete")
     deleteButton.dataset.id = this.id
@@ -91,22 +80,24 @@ class Pedal {
   
     deleteButton.addEventListener("click", this.deletePedal)
     pedalsUl.appendChild(liTag)
+
+    const br = document.createElement("br")
+    pedalsUl.appendChild(br)
   
   }
   
   deletePedal(event) {
     const id = event.target.dataset.id
     
-      const configObj = {
+      const config = {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
         }
       }
-      fetch(baseURL + "/" + "pedals" + "/" + id, configObj)
+      fetch(baseURL + "/" + "pedals" + "/" + id, config)
       .then(response => {
-    
         if (response.status === 204) {
         event.target.parentElement.remove()
         }
