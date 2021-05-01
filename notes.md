@@ -17,3 +17,15 @@ Project Checklist
 
     [] Your client-side JavaScript code must use fetch with the appropriate HTTP verb
     [] Your Rails API should use RESTful conventions
+
+
+
+    CHECK line  69 - 70 in pedal.js, used br?
+
+    Look up - "Content-Type": "application/json",
+               Accept: "application/json"
+
+               which sends, receives this?
+
+               see line 88 for refactor using pedal-id for remove
+               

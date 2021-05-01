@@ -2,24 +2,20 @@ const baseURL = "http://127.0.0.1:3000"
 
 const pedalsUl = document.getElementById("pedals-list-ul")
 const newPedalsForm = document.getElementById("new-pedal-form")
-const pedalNameInput = document.getElementById("pedal-name")
-const pedalPriceInput = document.getElementById("price")
-const pedalEffectInput = document.getElementById("effect")
-const pedalBrandInput = document.getElementById("brand_name")
-const pedalImageInput = document.getElementById("image_link")
 
 newPedalsForm.addEventListener('submit', processForm)
 
 function processForm(event) {
   event.preventDefault()
-
-  const formInfo = {pedal:  {
-    name: pedalNameInput.value,
-    brand_name: pedalBrandInput.value,
-    effect: pedalEffectInput.value,
-    price: pedalPriceInput.value,
-    image_link: pedalImageInput.value
-  }}
+  const formInfo = {
+    pedal:  {
+      name: event.target[0].value,
+      brand_name: event.target[1].value,
+      effect: event.target[2].value,
+      price: event.target[3].value,
+      image_link: event.target[4].value
+    }
+  }
  
   const config = {
     method: 'POST',

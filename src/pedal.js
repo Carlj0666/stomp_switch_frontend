@@ -27,42 +27,25 @@ class Pedal {
     })
   }
 
-
   render() {
-    //create li's for the pedals
     const liTag = document.createElement("li")
-    //assign the inner text of the li
     liTag.id = `pedal-${this.id}`
   
     const divTag = document.createElement("div")
-//(2) What is the dataset here?
-    divTag.dataset.id = this.id
     divTag.innerText = this.name
     liTag.appendChild(divTag)
   
     const brand = document.createElement("p") 
-    brand.dataset.id = this.id
-    brand.innerText = this.brand_name
+    brand.innerText = "Brand: " + this.brand_name
     divTag.appendChild(brand)
   
-    const brandLabel = document.createTextNode("Brand: ")
-    brand.prepend(brandLabel)
-  
     const effect = document.createElement("p") 
-    effect.dataset.id = this.id
-    effect.innerText = this.effect
+    effect.innerText = "Effect: " + this.effect
     divTag.appendChild(effect)
   
-    const effectLabel = document.createTextNode("Effect: ")
-    effect.prepend(effectLabel)
-  
     const price = document.createElement("p") 
-    price.dataset.id = this.id
-    price.innerText = "$" + this.price
+    price.innerText = "Price: $" + this.price
     divTag.appendChild(price)
-  
-    const priceLabel = document.createTextNode("Price: ")
-    price.prepend(priceLabel)
   
     const imageUrl = this.image_link
     
@@ -89,20 +72,20 @@ class Pedal {
   
   deletePedal(event) {
     const id = event.target.dataset.id
-    
-      const config = {
-        method: 'DELETE',
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }
+    const config = {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
       }
-      fetch(baseURL + "/" + "pedals" + "/" + id, config)
-      .then(response => {
-        if (response.status === 204) {
+    }
+
+    fetch(baseURL + "/" + "pedals" + "/" + id, config)
+    .then(response => {
+      if (response.status === 204) {
         event.target.parentElement.remove()
-        }
-      })
+      }
+    })
   }
 
 }
