@@ -23,8 +23,10 @@ class Pedal {
   static renderAll() {
     Pedal.all.forEach(pedal => {
       pedal.render()
+      
     })
   }
+
 
   render() {
     //create li's for the pedals
@@ -76,7 +78,6 @@ class Pedal {
     deleteButton.dataset.id = this.id
     deleteButton.innerText = "Delete"
     liTag.appendChild(deleteButton)
-  
   
     deleteButton.addEventListener("click", this.deletePedal)
     pedalsUl.appendChild(liTag)
