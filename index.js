@@ -3,6 +3,7 @@ const baseURL = "http://127.0.0.1:3000"
 const pedalsUl = document.getElementById("pedals-list-ul")
 const newPedalsForm = document.getElementById("new-pedal-form")
 
+
 newPedalsForm.addEventListener('submit', processForm)
 
 function processForm(event) {
