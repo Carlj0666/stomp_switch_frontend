@@ -23,7 +23,6 @@ class Pedal {
   static renderAll() {
     Pedal.all.forEach(pedal => {
       pedal.render()
-      
     })
   }
 
