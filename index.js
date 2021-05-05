@@ -2,10 +2,8 @@ const baseURL = "http://127.0.0.1:3000"
 
 const pedalsUl = document.getElementById("pedals-list-ul")
 const newPedalsForm = document.getElementById("new-pedal-form")
-// const sortButton = document.getElementById("sort")
 
 newPedalsForm.addEventListener('submit', processForm)
-// sortButton.addEventListener('click', Pedal.renderSortByName)
 
 function processForm(event) {
   event.preventDefault()
@@ -37,15 +35,10 @@ function processForm(event) {
   })
 }
 
-function createPedals(pedalsData) {
-  pedalsData.forEach(pedalData => {
-    new Pedal({id: pedalData.id, ...pedalData.attributes})
-  })
-}
 
 Pedal.fetchPedals()
 .then(pedals => {
-  createPedals(pedals.data)
+  Pedal.createPedals(pedals.data)
   Pedal.renderAll()
 })
 

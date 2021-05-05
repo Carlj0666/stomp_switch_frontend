@@ -20,11 +20,19 @@ class Pedal {
     return data
   }
 
+  static createPedals(pedalsData) {
+    pedalsData.forEach(pedalData => {
+      new Pedal({id: pedalData.id, ...pedalData.attributes})
+    })
+  }
+
   static renderAll() {
     Pedal.all.forEach(pedal => {
       pedal.render()
     })
   }
+
+
 
   render() {
     const liTag = document.createElement("li")
@@ -70,7 +78,8 @@ class Pedal {
   }
   
   deletePedal(event) {
-    const id = event.target.dataset.id
+    const deleteBtn = event.target
+    const pedalId = deleteBtn.dataset.id
     const config = {
       method: 'DELETE',
       headers: {
@@ -79,10 +88,10 @@ class Pedal {
       }
     }
 
-    fetch(baseURL + "/" + "pedals" + "/" + id, config)
+    fetch(baseURL + "/pedals/" + pedalId, config)
     .then(response => {
       if (response.status === 204) {
-        event.target.parentElement.remove()
+        deleteBtn.parentElement.remove()
       }
     })
   }
