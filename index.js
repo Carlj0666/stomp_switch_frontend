@@ -2,8 +2,10 @@ const baseURL = "http://127.0.0.1:3000"
 
 const pedalsUl = document.getElementById("pedals-list-ul")
 const newPedalsForm = document.getElementById("new-pedal-form")
+const cheapPedalButton = document.getElementById("cheap")
 
 newPedalsForm.addEventListener('submit', processForm)
+cheapPedalButton.addEventListener('click', Pedal.showCheapPedals)
 
 function processForm(event) {
   event.preventDefault()

@@ -26,6 +26,17 @@ class Pedal {
     })
   }
 
+  static showCheapPedals() {
+    console.log(pedalsUl)
+    pedalsUl.innerHTML = ''
+    const cheapPedals = Pedal.all.filter(element => {
+      return element.price < 300
+    })
+      cheapPedals.forEach(cheapPedal => {
+      cheapPedal.render()
+    })
+  }
+
   static renderAll() {
     Pedal.all.forEach(pedal => {
       pedal.render()
