@@ -10,10 +10,3 @@ Building out some additional functionality, such as adding a description section
 #### License
 Creative Commons License
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-
-SAMPLE DATA FOR NEW PEDAL!!
-Doom Screamer
-Fuzzlord
-Tube Screamer
-169.00
-https://i1.wp.com/fuzzlordeffects.com/wp-content/uploads/2020/03/Rev-2.jpg?fit=4240%2C2832&ssl=1
